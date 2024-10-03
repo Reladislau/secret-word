@@ -23,7 +23,7 @@ function App() {
   const [score, setScore] = useState(0);
 
   //Função de pegar categoria e palavras
-  const pickedWordAndCategory = () => {
+  const pickedWordAndCategory = useCallback( () => {
     // Introduzindo o Objeto
     const categories = Object.keys(words);
 
@@ -40,10 +40,13 @@ function App() {
     console.log(word);
 
     return { word, category };
-  };
+  }, [words]);
 
   //Dando o Start do jogo secret Word Game
-  const startGame = () => {
+  const startGame = useCallback( () => {
+    clearLetterStates()
+
+
     const { word, category } = pickedWordAndCategory();
 
     //Criando o Array de Letras da palavra escolhida
@@ -59,7 +62,7 @@ function App() {
 
     //trocando o Estágio de Games
     setGameState(stages[1].name);
-  };
+  }, [pickedWordAndCategory]);
 
   //Verificando a Letra
   const verifyLetter = (letter) => {
@@ -106,7 +109,19 @@ function App() {
     [guesses]
   );
 
-  
+  useEffect(() => {
+
+    const uniqueLetters = [...new Set(letters)]
+
+    if (guessedLetters.length === uniqueLetters.length){
+      setScore((actualScore) => actualScore += 100);
+      startGame();
+    }
+
+   
+
+  }, [guessedLetters, letters, startGame])
+
   //Dando o restart no game
   const restartGame = () => {
     setScore(0);

@@ -18,7 +18,6 @@ const Game = ({
   const handleSubmit= (e) => {
     e.preventDefault()
     verifyLetter(letter)
-
     setLetter("")
     letterInputRef.current.focus();
   } 
