@@ -95,7 +95,7 @@ function App() {
   };
 
   useEffect(
-    (guesses) => {
+    () => {
       if (guesses <= 0) {
         //reset all states
         clearLetterStates();
