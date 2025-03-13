@@ -1,6 +1,6 @@
 import "./App.css";
 import StartScreen from "./components/StartScreen";
-import Game from "./components/game";
+import Game from "./components/Game"; //Alteração de importação 12.03.2025 (g)
 import { useCallback, useEffect, useState } from "react";
 import { wordsList } from "./data/data";
 import GameOver from "./components/GameOver";
